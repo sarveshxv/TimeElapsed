@@ -22,6 +22,8 @@
             --colservices: #829F94;
         }
         body{
+            /* border: 1px solid wheat; */
+
             background: var(--colbg);
             color: var(--colwhite);
 
@@ -42,14 +44,18 @@
             align-items: flex-end;
             justify-content: center;
             width: 90vw;
-            height: 20vw;
+            height: 20vh;
+            max-width: 780px;
+            max-height: 156px;
             margin: auto;
             font-size: 4vh;    
         }
         .container{
             /* border: 1px solid white; */
             width: 90vw;
-            height: 45vh  ;
+            height: 45vh;
+            max-width: 780px;
+            /* max-height: 195px; */
             margin: auto;
             display: flex;
             flex-direction: row;
@@ -63,8 +69,10 @@
             flex-direction: column-reverse;
             align-items: center;
             justify-content: center;
-            height: 40vh;
+            height: 35vh;
             width: 90vw;
+            max-width: 780px;
+            /* max-height: 156px; */
             margin: auto;
             font-size: 2vh;
         }
@@ -74,7 +82,9 @@
         }
         .container div{
             width: 20vw;
+            max-width: 156px;
             height: auto;
+            /* max-height: 156px; */
             border-radius: 6%;
             background-color: var(--colfade);
             margin: auto;
@@ -88,7 +98,15 @@
             font-size: 3vw;
             margin-bottom: 3vw;
         }
-
+        @media (min-width: 780px) {
+            .container div{
+                font-size: 9rem;
+            }
+            .container div .heading-in{
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+        }
     </style>
 
 </head>
