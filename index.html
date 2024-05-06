@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracker</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Julius+Sans+One&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --colbg: #162F2C;
+            --colwhite: #fff;
+            --colfade: #829f9466;
+
+            /* UNCHANGED */
+            --colmain: #D9BBB0;
+            --coldeepmain: #829F94;
+            --colabout: #84949C;
+            --colservices: #829F94;
+        }
+        body{
+            background: var(--colbg);
+            color: var(--colwhite);
+
+            font-family: "Julius Sans One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .digits{
+            font-family: calibri;
+            font-weight: 200;
+            font-style: normal;
+        }
+        
+        .container3{
+            /* border: 1px solid white; */
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: center;
+            width: 90vw;
+            height: 20vw;
+            margin: auto;
+            font-size: 4vh;    
+        }
+        .container{
+            /* border: 1px solid white; */
+            width: 90vw;
+            height: 45vh  ;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .container2{
+            /* border: 1px solid white; */
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: center;
+            height: 40vh;
+            width: 90vw;
+            margin: auto;
+            font-size: 2vh;
+        }
+        .container2 div img{
+            height: 7vh;
+            margin: 2vh 0;
+        }
+        .container div{
+            width: 20vw;
+            height: auto;
+            border-radius: 6%;
+            background-color: var(--colfade);
+            margin: auto;
+            font-size: 15vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container div .heading-in{
+            font-size: 3vw;
+            margin-bottom: 3vw;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <div class="container3">
+        <div class="text">Time Elapsed</div>
+    </div>
+    
+    <div class="container">
+        <div><span class="digits" id="days-in"></span><span class="heading-in">Days</span></div>
+        <div><span class="digits" id="hours-in"></span><span class="heading-in">Hours</span></div>
+        <div><span class="digits" id="mins-in"></span><span class="heading-in">Minutes</span></div>
+        <div><span class="digits" id="secs-in"></span><span class="heading-in">Seconds</span></div>
+    </div>
+
+    <div class="container2">
+        <div id="time"></div>
+        <div><img src="main-png.png" alt=""></div>
+    </div>
+    
+
+    <script>
+        // Function to update the clock
+        function updateClock() {
+            const now = new Date();
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const time = now.getHours() + ':' + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes(); // Format minutes with leading zero if needed
+            const date = [now.getDate(), months[now.getMonth()], now.getFullYear()].join(' ');
+
+            // Set the content of an HTML element with the ID 'time' to the formatted string
+            document.getElementById('time').innerHTML = [date, time].join(' / ');
+
+            // Call this function again in 1000ms (1 second)
+            setTimeout(updateClock, 1000);
+        }
+
+        // Initial call to start updating the clock
+        updateClock();
+
+        // Assuming you have a variable 'startTime' representing the task start time
+        const startTime = new Date('2024-05-03T19:15:00'); // Replace with your actual start time
+
+        // Function to update the total hours and seconds
+        function updateElapsedTime() {
+            const currentTime = new Date();
+            const elapsedTime = currentTime - startTime;
+
+            const seconds = Math.floor((elapsedTime / 1000) % 60);
+            const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+            const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+
+            document.getElementById('days-in').textContent = days;
+            document.getElementById('hours-in').textContent = hours;
+            document.getElementById('mins-in').textContent = minutes;
+            document.getElementById('secs-in').textContent = seconds;
+        }
+
+        setInterval(updateElapsedTime, 1000);
+    </script>
+</body>
+</html>
